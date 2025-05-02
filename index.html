@@ -1,0 +1,70 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dictionary</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Playfair+Display:ital@1&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+  />
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+    .italic-playfair {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body class="bg-white min-h-screen flex flex-col justify-between">
+  <main class="flex flex-col items-center px-6 pt-24 sm:pt-32">
+    <h1 class="text-5xl font-semibold text-black mb-16">Dictionary</h1>
+    <form class="w-full max-w-xl relative mb-12">
+      <input
+        type="text"
+        placeholder="Search for a word"
+        class="w-full border border-gray-300 rounded-xl py-3 px-5 pr-12 text-gray-400 text-base placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400"
+      />
+      <i
+        class="fas fa-search absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 text-lg pointer-events-none"
+        aria-hidden="true"
+      ></i>
+    </form>
+
+    <div class="flex items-center space-x-6 mb-8 w-full max-w-xl">
+      <button
+        aria-label="Play pronunciation"
+        class="border border-gray-300 rounded-full p-4 text-orange-400 hover:bg-orange-50 focus:outline-none focus:ring-2 focus:ring-orange-400"
+      >
+        <i class="fas fa-volume-up text-xl"></i>
+      </button>
+      <h2 class="text-5xl font-semibold text-orange-400">designer</h2>
+    </div>
+
+    <div class="w-full max-w-xl">
+      <p class="italic-playfair italic text-sm mb-1">Meaning :</p>
+      <p class="text-base text-black mb-1">
+        A person who plans the form, look, or workings of something before its
+        being made or built, typically by drawing it in detail.
+      </p>
+      <p class="italic-playfair italic text-sm text-gray-400">
+        "She was one of the world's leading graphic designers."
+      </p>
+    </div>
+
+    <div class="w-full max-w-xl mt-8">
+      <p class="text-base text-black">Example :</p>
+    </div>
+  </main>
+
+  <footer class="text-center py-6 text-sm text-black font-mono">
+    @partharabha
+  </footer>
+</body>
+</html>
