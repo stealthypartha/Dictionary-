@@ -11,24 +11,21 @@
       body {
         font-family: 'Poppins', sans-serif;
       }
-      .clickable {
-        cursor: pointer;
-      }
     </style>
   </head>
-  <body class="bg-white min-h-screen flex flex-col justify-between transition-colors duration-300">
-    <main class="flex flex-col items-center px-6 pt-8 sm:pt-14">
+  <body class="bg-white min-h-screen flex flex-col justify-start transition-colors duration-300 pt-12">
+    <main class="flex flex-col items-center px-6">
       <h1 class="text-4xl font-semibold text-black mb-10">Dictionary</h1>
       <div class="w-full max-w-xl relative mb-6">
-        <input id="searchInput" type="text" placeholder="Search for a word" class="w-full border border-gray-300 rounded-xl py-3 px-5 pr-12 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400" />
-        <i id="searchIcon" class="fas fa-search absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 text-lg clickable"></i>
+        <input id="searchInput" type="text" placeholder="Search for a word or sentence" class="w-full border border-gray-300 rounded-xl py-3 px-5 pr-12 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400" />
+        <i id="searchIcon" class="fas fa-search absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 text-lg cursor-pointer"></i>
       </div>
 
-      <div class="flex items-center space-x-6 mb-6 w-full max-w-xl">
+      <div class="flex items-center space-x-4 mb-6 w-full max-w-xl">
         <button aria-label="Play pronunciation" id="playAudio" class="border border-gray-300 rounded-full p-4 text-orange-400 hover:bg-orange-50 focus:outline-none focus:ring-2 focus:ring-orange-400">
           <i class="fas fa-volume-up text-xl"></i>
         </button>
-        <h2 id="translated-word" class="text-3xl font-semibold text-orange-400"></h2>
+        <h2 id="translated-word" class="text-2xl font-semibold text-orange-400"></h2>
       </div>
 
       <div class="w-full max-w-xl">
@@ -41,7 +38,7 @@
       </div>
     </main>
 
-    <footer class="text-center py-6 text-sm text-black font-mono">
+    <footer class="text-center py-6 text-sm text-black font-mono mt-auto">
       @partharabha
     </footer>
 
@@ -62,36 +59,39 @@
       const exampleEl = document.getElementById("example");
       const audioBtn = document.getElementById("playAudio");
 
-      const fuzzyMatch = (query) => {
-        let best = null;
-        let highest = 0;
-        for (let word in dictionary) {
-          let match = 0;
-          for (let i = 0; i < Math.min(word.length, query.length); i++) {
-            if (word[i] === query[i]) match++;
-            else break;
-          }
-          if (match > highest) {
-            highest = match;
-            best = word;
-          }
-        }
-        return best;
-      };
+      async function translateSentence(text, from = "en", to = "ja") {
+        const res = await fetch("https://libretranslate.com/translate", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ q: text, source: from, target: to, format: "text" })
+        });
+        const data = await res.json();
+        return data.translatedText;
+      }
 
-      const searchWord = () => {
-        const query = input.value.trim().toLowerCase();
-        const bestMatch = dictionary[query] ? query : fuzzyMatch(query);
-        const entry = dictionary[bestMatch];
-        if (entry) {
-          translatedWord.textContent = entry.translation;
-          const isEnglish = /^[a-zA-Z ]+$/.test(query);
-          meaningEl.textContent = isEnglish ? `${entry.meaning} (${entry.meaningJ})` : `${entry.meaningJ} (${entry.meaning})`;
-          exampleEl.textContent = isEnglish ? `${entry.exampleE} (${entry.example})` : `${entry.example} (${entry.exampleE})`;
+      const searchWord = async () => {
+        const query = input.value.trim();
+        if (!query) return;
+
+        if (query.split(" ").length > 1) {
+          const fromLang = /^[a-zA-Z ]+$/.test(query) ? "en" : "ja";
+          const toLang = fromLang === "en" ? "ja" : "en";
+          const translated = await translateSentence(query, fromLang, toLang);
+          translatedWord.textContent = translated;
+          meaningEl.textContent = `Sentence translation:`;
+          exampleEl.textContent = `"${query}" → "${translated}"`;
         } else {
-          translatedWord.textContent = "Not found";
-          meaningEl.textContent = "No meaning found.";
-          exampleEl.textContent = "No example found.";
+          const entry = dictionary[query.toLowerCase()];
+          if (entry) {
+            translatedWord.textContent = entry.translation;
+            const isEnglish = /^[a-zA-Z ]+$/.test(query);
+            meaningEl.textContent = isEnglish ? `${entry.meaning} (${entry.meaningJ})` : `${entry.meaningJ} (${entry.meaning})`;
+            exampleEl.textContent = isEnglish ? `${entry.exampleE} (${entry.example})` : `${entry.example} (${entry.exampleE})`;
+          } else {
+            translatedWord.textContent = "Not found";
+            meaningEl.textContent = "No meaning found.";
+            exampleEl.textContent = "No example found.";
+          }
         }
       };
 
