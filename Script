@@ -1,0 +1,166 @@
+<script>
+  const dictionary = {
+    "gohan": {
+      translation: "rice",
+      meaning: "A type of food; rice.",
+      example: "Gohan kudasai. (Please give me rice.)"
+    },
+    "rice": {
+      translation: "gohan",
+      meaning: "A type of food; rice.",
+      example: "Gohan kudasai. (Please give me rice.)"
+    },
+    "neko": {
+      translation: "cat",
+      meaning: "A small domesticated carnivorous mammal.",
+      example: "Neko wa kawaii desu. (The cat is cute.)"
+    },
+    "cat": {
+      translation: "neko",
+      meaning: "A small domesticated carnivorous mammal.",
+      example: "Neko wa kawaii desu. (The cat is cute.)"
+    },
+    "konnichiwa": {
+      translation: "hello",
+      meaning: "A greeting used during the day; hello.",
+      example: "Konnichiwa! Ogenki desu ka? (Hello! How are you?)"
+    },
+    "hello": {
+      translation: "konnichiwa",
+      meaning: "A greeting used during the day; hello.",
+      example: "Konnichiwa! Ogenki desu ka? (Hello! How are you?)"
+    },
+    "arigatou": {
+      translation: "thank you",
+      meaning: "An expression of gratitude.",
+      example: "Arigatou gozaimasu. (Thank you very much.)"
+    },
+    "thank you": {
+      translation: "arigatou",
+      meaning: "An expression of gratitude.",
+      example: "Arigatou gozaimasu. (Thank you very much.)"
+    },
+    "sayonara": {
+      translation: "goodbye",
+      meaning: "A farewell remark.",
+      example: "Sayonara! Mata aimashou. (Goodbye! Let's meet again.)"
+    },
+    "goodbye": {
+      translation: "sayonara",
+      meaning: "A farewell remark.",
+      example: "Sayonara! Mata aimashou. (Goodbye! Let's meet again.)"
+    },
+    "tomodachi": {
+      translation: "friend",
+      meaning: "A person you like and enjoy being with.",
+      example: "Watashi no tomodachi wa shinsetsu desu. (My friend is kind.)"
+    },
+    "friend": {
+      translation: "tomodachi",
+      meaning: "A person you like and enjoy being with.",
+      example: "Watashi no tomodachi wa shinsetsu desu. (My friend is kind.)"
+    },
+    // Japanese to English
+    "arigatou": {
+      translation: "thank you",
+      meaning: "An expression of gratitude.",
+      example: "Arigatou gozaimasu. (Thank you very much.)"
+    },
+    "aisatsu": {
+      translation: "greeting",
+      meaning: "A polite word or gesture of welcome.",
+      example: "Asa no aisatsu wa taisetsu desu. (Morning greetings are important.)"
+    },
+    "aoi": {
+      translation: "blue",
+      meaning: "A color representing the sky or sea.",
+      example: "Sora wa aoi desu. (The sky is blue.)"
+    },
+    "akai": {
+      translation: "red",
+      meaning: "A bright color often associated with fire or love.",
+      example: "Akai hana desu. (It is a red flower.)"
+    },
+    "asa": {
+      translation: "morning",
+      meaning: "The early part of the day.",
+      example: "Asa gohan o tabemasu. (I eat breakfast.)"
+    },
+    "ame": {
+      translation: "rain",
+      meaning: "Water that falls from the sky.",
+      example: "Ame ga futteimasu. (It is raining.)"
+    },
+    "anata": {
+      translation: "you",
+      meaning: "Refers to the person being spoken to.",
+      example: "Anata wa genki desu ka? (How are you?)"
+    },
+    "atama": {
+      translation: "head",
+      meaning: "The upper part of the human body.",
+      example: "Atama ga itai desu. (I have a headache.)"
+    },
+    "abunai": {
+      translation: "dangerous",
+      meaning: "Likely to cause harm.",
+      example: "Soko wa abunai desu. (It is dangerous there.)"
+    },
+    "aruku": {
+      translation: "walk",
+      meaning: "To move on foot.",
+      example: "Kouen o arukimasu. (I walk in the park.)"
+    },
+
+    // English to Japanese
+    "thank you": {
+      translation: "arigatou",
+      meaning: "An expression of gratitude.",
+      example: "Arigatou gozaimasu. (Thank you very much.)"
+    },
+    "greeting": {
+      translation: "aisatsu",
+      meaning: "A polite word or gesture of welcome.",
+      example: "Asa no aisatsu wa taisetsu desu. (Morning greetings are important.)"
+    },
+    "blue": {
+      translation: "aoi",
+      meaning: "A color representing the sky or sea.",
+      example: "Sora wa aoi desu. (The sky is blue.)"
+    },
+    "red": {
+      translation: "akai",
+      meaning: "A bright color often associated with fire or love.",
+      example: "Akai hana desu. (It is a red flower.)"
+    },
+    "morning": {
+      translation: "asa",
+      meaning: "The early part of the day.",
+      example: "Asa gohan o tabemasu. (I eat breakfast.)"
+    },
+    "rain": {
+      translation: "ame",
+      meaning: "Water that falls from the sky.",
+      example: "Ame ga futteimasu. (It is raining.)"
+    },
+    "you": {
+      translation: "anata",
+      meaning: "Refers to the person being spoken to.",
+      example: "Anata wa genki desu ka? (How are you?)"
+    },
+    "head": {
+      translation: "atama",
+      meaning: "The upper part of the human body.",
+      example: "Atama ga itai desu. (I have a headache.)"
+    },
+    "dangerous": {
+      translation: "abunai",
+      meaning: "Likely to cause harm.",
+      example: "Soko wa abunai desu. (It is dangerous there.)"
+    },
+    "walk": {
+      translation: "aruku",
+      meaning: "To move on foot.",
+      example: "Kouen o arukimasu. (I walk in the park.)"
+    }
+  };
