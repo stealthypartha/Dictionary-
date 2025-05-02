@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -20,22 +21,27 @@
       font-family: 'Playfair Display', serif;
       font-style: italic;
     }
+    .clickable {
+      cursor: pointer;
+    }
   </style>
 </head>
 <body class="bg-white min-h-screen flex flex-col justify-between">
   <main class="flex flex-col items-center px-6 pt-24 sm:pt-32">
     <h1 class="text-5xl font-semibold text-black mb-16">Dictionary</h1>
-    <form class="w-full max-w-xl relative mb-12">
+    <div class="w-full max-w-xl relative mb-12">
       <input
+        id="searchInput"
         type="text"
         placeholder="Search for a word"
         class="w-full border border-gray-300 rounded-xl py-3 px-5 pr-12 text-gray-400 text-base placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400"
       />
       <i
-        class="fas fa-search absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 text-lg pointer-events-none"
+        id="searchIcon"
+        class="fas fa-search absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 text-lg clickable"
         aria-hidden="true"
       ></i>
-    </form>
+    </div>
 
     <div class="flex items-center space-x-6 mb-8 w-full max-w-xl">
       <button
@@ -44,27 +50,118 @@
       >
         <i class="fas fa-volume-up text-xl"></i>
       </button>
-      <h2 class="text-5xl font-semibold text-orange-400">designer</h2>
-    </div>
-
-    <div class="w-full max-w-xl">
-      <p class="italic-playfair italic text-sm mb-1">Meaning :</p>
-      <p class="text-base text-black mb-1">
-        A person who plans the form, look, or workings of something before its
-        being made or built, typically by drawing it in detail.
-      </p>
-      <p class="italic-playfair italic text-sm text-gray-400">
-        "She was one of the world's leading graphic designers."
-      </p>
+      <h2 id="translated-word" class="text-5xl font-semibold text-orange-400"></h2>
     </div>
 
     <div class="w-full max-w-xl mt-8">
+      <p class="text-base text-black">Meaning :</p>
+      <p id="meaning" class="text-base text-black mb-1">
+      </p>
+    </div>
+    <div class="w-full max-w-xl mt-8">
       <p class="text-base text-black">Example :</p>
+      <p id="example" class="text-base text-black">
+      </p>
     </div>
   </main>
 
   <footer class="text-center py-6 text-sm text-black font-mono">
     @partharabha
   </footer>
-</body>
-</html>
+
+ <script>
+  const dictionary = {
+    "gohan": {
+      translation: "rice",
+      meaning: "A type of food; rice.",
+      example: "Gohan kudasai. (Please give me rice.)"
+    },
+    "rice": {
+      translation: "gohan",
+      meaning: "A type of food; rice.",
+      example: "Gohan kudasai. (Please give me rice.)"
+    },
+    "neko": {
+      translation: "cat",
+      meaning: "A small domesticated carnivorous mammal.",
+      example: "Neko wa kawaii desu. (The cat is cute.)"
+    },
+    "cat": {
+      translation: "neko",
+      meaning: "A small domesticated carnivorous mammal.",
+      example: "Neko wa kawaii desu. (The cat is cute.)"
+    },
+    "konnichiwa": {
+      translation: "hello",
+      meaning: "A greeting used during the day; hello.",
+      example: "Konnichiwa! Ogenki desu ka? (Hello! How are you?)"
+    },
+    "hello": {
+      translation: "konnichiwa",
+      meaning: "A greeting used during the day; hello.",
+      example: "Konnichiwa! Ogenki desu ka? (Hello! How are you?)"
+    },
+    "arigatou": {
+      translation: "thank you",
+      meaning: "An expression of gratitude.",
+      example: "Arigatou gozaimasu. (Thank you very much.)"
+    },
+    "thank you": {
+      translation: "arigatou",
+      meaning: "An expression of gratitude.",
+      example: "Arigatou gozaimasu. (Thank you very much.)"
+    },
+    "sayonara": {
+      translation: "goodbye",
+      meaning: "A farewell remark.",
+      example: "Sayonara! Mata aimashou. (Goodbye! Let's meet again.)"
+    },
+    "goodbye": {
+      translation: "sayonara",
+      meaning: "A farewell remark.",
+      example: "Sayonara! Mata aimashou. (Goodbye! Let's meet again.)"
+    },
+    "tomodachi": {
+      translation: "friend",
+      meaning: "A person you like and enjoy being with.",
+      example: "Watashi no tomodachi wa shinsetsu desu. (My friend is kind.)"
+    },
+    "friend": {
+      translation: "tomodachi",
+      meaning: "A person you like and enjoy being with.",
+      example: "Watashi no tomodachi wa shinsetsu desu. (My friend is kind.)"
+    }
+  };
+
+  function searchWord() {
+    const input = document.getElementById("searchInput");
+    const query = input.value.trim().toLowerCase();
+    const translatedWord = document.getElementById("translated-word");
+    const meaningEl = document.getElementById("meaning");
+    const exampleEl = document.getElementById("example");
+
+    if (dictionary[query]) {
+      translatedWord.textContent = dictionary[query].translation;
+      meaningEl.textContent = dictionary[query].meaning;
+      exampleEl.textContent = dictionary[query].example;
+    } else {
+      translatedWord.textContent = "Not found";
+      meaningEl.textContent = "No meaning found.";
+      exampleEl.textContent = "No example found.";
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const input = document.getElementById("searchInput");
+    const icon = document.getElementById("searchIcon");
+
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        searchWord();
+      }
+    });
+
+    icon.addEventListener("click", searchWord);
+  });
+ </script>
